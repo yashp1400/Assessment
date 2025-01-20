@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="Form.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+</head>
+<body>
+
+    <div class="col-12 text"><a href="">Student Registration form</a></div>
+    
+    <form id="registrationForm">
+        <div class="row form">
+            <div class="col-2 thead">First Name :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="text" id="name" name="name" pattern="[A-Za-z]{3,6}" 
+                       title="Only alphabets allowed (3 to 6 characters)" required 
+                       placeholder="Enter your first name">
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Last Name :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="text" name="lname" placeholder="Enter your last name" spellcheck="true" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Email :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="email" name="email" placeholder="Enter your email" spellcheck="true" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Mobile :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="text" id="mobile" name="mobile" pattern="[0-9]{10}" 
+                       title="Only numbers allowed (exactly 10 digits)" maxlength="10" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Gender :</div>
+            <div class="col-8 tdata">
+                <input type="radio" name="gender" value="Male" required>Male
+                <input type="radio" name="gender" value="Female">Female
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Date Of Birth :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="date" name="date" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Address :</div>
+            <div class="col-8 tdata">
+                <textarea class="col-12" name="address" rows="3" required></textarea>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">City :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="text" name="cityname" placeholder="Enter your city" spellcheck="true" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Area Pin :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="number" name="pin" placeholder="Enter your area pin" spellcheck="true" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">State :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="text" name="statename" placeholder="Enter your state" spellcheck="true" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Qualification :</div>
+            <div class="col-8 tdata">
+                <select name="qualification" required>
+                    <option value="">Select Qualification</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="MCA">MCA</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Specialization :</div>
+            <div class="col-8 tdata">
+                <input type="checkbox" name="specialization" value="Computer Science">Computer Science<br>
+                <input type="checkbox" name="specialization" value="Information Technology">Information Technology<br>
+                <input type="checkbox" name="specialization" value="Computer Architecture">Computer Architecture<br>
+                <input type="checkbox" name="specialization" value="Tele Communication">Tele Communication
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">Password :</div>
+            <div class="col-8 tdata">
+                <input class="col-12" type="password" name="pass" placeholder="Enter password" required>
+            </div>
+        </div>
+
+        <div class="row form">
+            <div class="col-2 thead">
+                <input type="submit" value="Register">
+            </div>
+        </div>
+
+    </form>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            let inputs = document.querySelectorAll("#registrationForm input[required], #registrationForm select[required], #registrationForm textarea[required]");
+            let allFilled = true;
+
+            inputs.forEach(input => {
+                if (input.type === "radio") {
+                    let name = input.name;
+                    let checked = document.querySelector(`input[name="${name}"]:checked`);
+                    if (!checked) {
+                        allFilled = false;
+                    }
+                } else if (!input.value.trim()) {
+                    allFilled = false;
+                }
+            });
+
+            if (!allFilled) {
+                alert("Please fill out all required fields!");
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+
+</body>
+</html>
