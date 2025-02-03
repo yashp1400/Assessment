@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        input{
+            width: 500px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px 5px 5px 5px;
+        }
+        select{
+            width: 520px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px 5px 5px 5px;
+
+        }
+        button{
+            padding: 8px;
+            border-radius: 5px 5px 5px 5px;
+
+        }
+        h1{
+            text-align: center;
+        }
+        .check{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registration Form :</h1>
+
+    <form id="myForm">
+        <label>Email:</label>
+        <input type="email" id="email">
+        <label>Password:</label>
+        <input type="password" id="password">
+        <label>Re-type Password:</label>
+        <input type="password" id="repassword">
+        <label>First Name:</label>
+        <input type="text" id="firstname">
+        <label>Last Name:</label>
+        <input type="text" id="lastname">
+        <label>Gender:</label>
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <label>Country:</label>
+        <select id="country">
+            <option value="">Select Country</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+            <option value="Canada">Canada</option>
+        </select>
+        <label>Mobile Number:</label>
+        <input type="text" id="mobile" maxlength="10">
+        <br>
+        <div class="check">
+        <input type="checkbox" id="terms"/><p>Accept Terms & Conditions</p>
+        <input type="checkbox" id="newsletter"/><p> Subscribe to Newsletter</p>
+    </div>
+
+        <!-- <input type="checkbox" id="terms"><span>Accept Terms & Conditions</span>
+        <input type="checkbox" id="newsletter"> Subscribe to Newsletter -->
+
+       <br><br> <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            validateForm();
+        });
+
+        function validateForm() {
+            let fields = [
+                { id: 'email', message: 'Email is required' },
+                { id: 'password', message: 'Password is required' },
+                { id: 'repassword', message: 'Re-type Password is required' },
+                { id: 'firstname', message: 'First Name is required' },
+                { id: 'lastname', message: 'Last Name is required' },
+                { id: 'gender', message: 'Gender is required' },
+                { id: 'country', message: 'Country is required' }
+            ];
+
+            // Remove old error messages
+            document.querySelectorAll('.error').forEach(e => e.remove());
+
+            let isValid = true;
+            
+            fields.forEach(field => {
+                let input = document.getElementById(field.id);
+                if (input.value.trim() === '') {
+                    showError(input, field.message);
+                    isValid = false;
+                }
+            });
+
+            // Validate password match
+            let password = document.getElementById('password').value;
+            let repassword = document.getElementById('repassword').value;
+            if (password !== repassword) {
+                showError(document.getElementById('repassword'), 'Passwords do not match');
+                isValid = false;
+            }
+
+            // Validate checkbox
+ 
